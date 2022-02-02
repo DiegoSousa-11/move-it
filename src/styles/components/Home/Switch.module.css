@@ -1,0 +1,50 @@
+.container {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 55%;
+    height: 30px;
+
+    padding: 2px;
+
+    margin-inline: auto;
+    margin-bottom: 2rem;
+
+    border-radius: 20px;
+
+    background-color: var(--gray-line);
+}
+
+.container span {
+    margin-inline: 5px;
+    margin-block: auto;
+}
+
+.container div {
+    cursor: pointer;
+    position: absolute;
+
+    width: 26px;
+    height: 26px;
+
+    border-radius: 50%;
+
+    background-color: white;
+
+    -webkit-transition: all 150ms ease-in-out;
+    transition: all 150ms ease-in-out;
+}
+
+.container div[aria-checked = true] {
+    left: 59px;
+}
+
+.container div[aria-checked = false] {
+    left: 27px;
+}
+
+.container:hover div {
+    box-shadow: 0 0 4px 0px rgba(110, 64, 201, 0.6) inset, 0 0 5px 3px rgba(110, 64, 201, 0.6);
+}

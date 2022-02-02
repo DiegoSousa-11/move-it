@@ -1,11 +1,13 @@
 import { useContext } from 'react';
-import { ChallengesContext } from '../contexts/ChallengesContext';
-import { CountdownContext } from '../contexts/CountdownContext';
-import styles from '../styles/components/ChallengeBox.module.css';
+import { ChallengesContext } from '../../contexts/ChallengesContext';
+import { CountdownContext } from '../../contexts/CountdownContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import styles from '../../styles/components/Home/ChallengeBox.module.css';
 
 export function ChallengeBox() {
     const { activeChallenge, resetChallenge, completeChallenge } = useContext(ChallengesContext);
     const { resetCountdown } = useContext(CountdownContext);
+    const { theme } = useContext(ThemeContext);
 
     function handleChallengeSucceeded() {
         completeChallenge();
@@ -18,7 +20,7 @@ export function ChallengeBox() {
     }
 
     return(
-        <div className={styles.challengeBoxContainer}>
+        <div style={theme && {backgroundColor: theme.secondaryColor}} className={styles.challengeBoxContainer}>
             { activeChallenge ? (
                 <div className={styles.challengeActive}>
                     <header>Ganhe {activeChallenge.amount} xp</header>

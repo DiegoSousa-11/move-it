@@ -1,4 +1,8 @@
 .container {
+    display: flex;
+}
+
+.dashboard {
     height: 100vh;
     max-width: 992px;
     margin: 0 auto;
@@ -8,7 +12,7 @@
     flex-direction: column;
 }
 
-.container section {
+.dashboard section {
     flex: 1;
 
     display: grid;
@@ -18,30 +22,30 @@
 }
 
 @media(max-width: 750px) {
-    .container section {
+    .dashboard section {
         display: block;
         width: 70%;
         margin: 0 auto;
     }
 
-    .container section > div {
+    .dashboard section > div {
         margin: 50px 0;
     }
 
-    .container section div:last-child  > div:last-child {
+    .dashboard section div:last-child  > div:last-child {
         height: 500px;
         justify-content: center
     }
 }
 
 @media(max-width: 550px) {
-    .container section {
+    .dashboard section {
         width: 80%;
     }
 }
 
 @media(max-width: 420px) {
-    .container section {
+    .dashboard section {
         width: 95%;
     }
 }

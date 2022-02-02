@@ -1,0 +1,14 @@
+.container {
+    display: flex;
+}
+
+.dashboard {
+    height: 100vh;
+    max-width: 992px;
+    margin: 0 auto;
+    padding: 2.5rem 2rem;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}

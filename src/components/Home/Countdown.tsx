@@ -1,6 +1,7 @@
 import { useContext } from 'react';
-import { CountdownContext } from '../contexts/CountdownContext';
-import styles from '../styles/components/Countdown.module.css';
+import { CountdownContext } from '../../contexts/CountdownContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
+import styles from '../../styles/components/Home/Countdown.module.css';
 
 export function Countdown() {
     const { 
@@ -11,7 +12,9 @@ export function Countdown() {
         percentTime,
         startCountdown, 
         resetCountdown 
-    } = useContext(CountdownContext)
+    } = useContext(CountdownContext);
+
+    const { theme } = useContext(ThemeContext);
 
     /* padStart verifica se os minutos tem 2 caracteres, se não ele acresenta "0" no começo(start), 
     e o split devolve um array com os dois números separadamente */
@@ -20,13 +23,16 @@ export function Countdown() {
 
     return(
         <div>
-            <div className={styles.countdownContainer}>
-                <div>
+            <div 
+            aria-details={theme && "darkTheme"} 
+            style={theme && {color: theme.text}} 
+            className={styles.countdownContainer}>
+                <div style={theme && {backgroundColor: "#111111"}}>
                     <span>{minuteLeft}</span>
                     <span>{minuteRight}</span>
                 </div>
                 <span>:</span>
-                <div>
+                <div style={theme && {backgroundColor: "#111111"}}>
                     <span>{secondLeft}</span>
                     <span>{secondRight}</span>
                 </div>
