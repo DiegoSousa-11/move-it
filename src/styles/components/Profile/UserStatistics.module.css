@@ -6,7 +6,8 @@
 }
 
 .container section {
-    width: 100%;
+    margin-inline: 1.5rem;
+    max-width: 200px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -14,6 +15,8 @@
 
 .container section div {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .container section p {

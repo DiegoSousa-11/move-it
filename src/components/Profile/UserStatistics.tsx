@@ -18,7 +18,7 @@ export function UserStatistics() {
                 <div>
                     <Icon icon="fluent:checkmark-12-filled" height="50" />
                     <p>
-                        Desafios completos
+                        Desafios<br/> completos
                     </p>
                 </div>
                 <h1>1</h1>
