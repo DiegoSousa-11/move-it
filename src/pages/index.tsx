@@ -1,62 +1,46 @@
-import { ChallengeBox } from "../components/Home/ChallengeBox";
-import { CompletedChallenges } from "../components/Home/CompletedChallenges";
-import { Countdown } from "../components/Home/Countdown";
-import { ExperienceBar } from "../components/Home/ExperienceBar";
-import { Profile } from "../components/Home/Profile";
-
+import { Icon } from '@iconify/react';
 import Head from 'next/head';
-import { GetServerSideProps } from 'next';
+import { useState } from 'react';
+import styles from '../styles/pages/InitialScreen.module.css';
 
-import styles from '../styles/pages/Home.module.css';
-import { CountdownProvider } from "../contexts/CountdownContext";
-import { ChallengesProvider } from "../contexts/ChallengesContext";
-import { Menu } from "../components/Common/Menu";
-import { useContext } from "react";
-import { ThemeContext } from "../contexts/ThemeContext";
-
-export default function Home(props) {
-  const { theme } = useContext(ThemeContext);
+export default function InitialScreen() {
+  const [modalIsVisible, setModalIsVisible] = useState(false);
 
   return (
-    <ChallengesProvider 
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}>
-      <div 
-      style={theme && {backgroundColor: theme.primaryColor}} 
-      className={styles.container}>
-        <Menu currentScreen="HOME"/>
-        <div className={styles.dashboard}>
-          <Head>
-            <title>Início | move.it</title>
-          </Head>
-          <ExperienceBar />
-          <CountdownProvider> {/*Foi colocado aqui, pois não vai ser usado em todo o app somente em algumas partes em específico */}
-            <section>
-              <div>
-                <Profile />
-                <CompletedChallenges />
-                <Countdown />
-              </div>
-              <div>
-                <ChallengeBox />
-              </div>
-            </section>
-          </CountdownProvider>
+    <div className={styles.container}>
+      <Head>
+        <title>Move.it</title>
+      </Head>
+
+      <section className={styles.logo}>
+        <img src="Logo-Little.svg" alt="logo_menor" data-animate="logo_menor" />
+        <img src="Logo-Big.svg" alt="logo_maior" data-animate="logo_maior"/>
+        <img src="Logo-Little.svg" alt="logo_menor" data-animate="logo_menor"/>
+      </section>
+
+      <section className={styles.main}>
+        <img src="logo_full.svg" alt="logo_full" />
+        <h1>Bem vindo!</h1>
+        <h2>Faça login para começar!</h2>
+        <button onClick={() => setModalIsVisible(true)}>
+          Fazer login
+        </button>
+      </section>
+
+      <div onClick={() => setModalIsVisible(false)} aria-modal={modalIsVisible} className={styles.overlay}>
+        <div className={styles.modal}>
+          <p>Insira seu nome e uma foto para deixar seu perfil com a sua cara!</p>
+          <div className={styles.profileImage}>
+            <div>
+                <Icon icon="fluent:camera-edit-20-regular" width="40" />
+                <p>Clique aqui para inserir uma nova foto de perfil</p>
+            </div>
+            <img src="Profile.svg" alt="Avatar-User" />
+          </div>
+          <input type="text" placeholder='Insira seu nome' />
+          <button>Logar</button>
         </div>
       </div>
-    </ChallengesProvider>
+    </div>
   );
-}
-
-export const getServerSideProps: GetServerSideProps = async (ctx) => { 
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
-  
-  return {
-    props: {
-      level: Number(level),
-      currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted)
-    }
-  }
 }

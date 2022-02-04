@@ -14,7 +14,7 @@ export function Menu({currentScreen}: {currentScreen: string}) {
       <div style={theme && {backgroundColor: theme.secondaryColor}} className={styles.container}>
         <img src="logo.svg" alt="" />
         <nav>
-          <div onClick={() => routes.push("./")} className={`${styles.options} ${currentScreen == "HOME" && styles.active}`}>
+          <div onClick={() => routes.push("./Home")} className={`${styles.options} ${currentScreen == "HOME" && styles.active}`}>
             <div />
             <Icon icon="feather:home" width="32"/>
           </div>
