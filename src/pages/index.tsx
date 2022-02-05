@@ -1,46 +1,78 @@
 import { Icon } from '@iconify/react';
+import Cookies from 'js-cookie';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
+import { UserProvider } from '../contexts/UserContext';
 import styles from '../styles/pages/InitialScreen.module.css';
 
-export default function InitialScreen() {
+export default function InitialScreen(props) {
   const [modalIsVisible, setModalIsVisible] = useState(false);
+  const [name, setName] = useState("");
+  const [profileImage, setProfileImage] = useState(null) as any;
+
+  function saveUser() {
+    Cookies.set('userName', name);
+    Cookies.set('profileImage', profileImage);
+  }
 
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Move.it</title>
-      </Head>
+    <UserProvider 
+    name={props.userName}
+    userImage={props.profileImage}>
+      <div className={styles.container}>
+        <Head>
+          <title>Move.it</title>
+        </Head>
 
-      <section className={styles.logo}>
-        <img src="Logo-Little.svg" alt="logo_menor" data-animate="logo_menor" />
-        <img src="Logo-Big.svg" alt="logo_maior" data-animate="logo_maior"/>
-        <img src="Logo-Little.svg" alt="logo_menor" data-animate="logo_menor"/>
-      </section>
+        <section className={styles.logo}>
+          <img src="Logo-Little.svg" alt="logo_menor" data-animate="logo_menor" />
+          <img src="Logo-Big.svg" alt="logo_maior" data-animate="logo_maior"/>
+          <img src="Logo-Little.svg" alt="logo_menor" data-animate="logo_menor"/>
+        </section>
 
-      <section className={styles.main}>
-        <img src="logo_full.svg" alt="logo_full" />
-        <h1>Bem vindo!</h1>
-        <h2>Faça login para começar!</h2>
-        <button onClick={() => setModalIsVisible(true)}>
-          Fazer login
-        </button>
-      </section>
+        <section className={styles.main}>
+          <img src="logo_full.svg" alt="logo_full" />
+          <h1>Bem vindo!</h1>
+          <h2>Faça login para começar!</h2>
+          <button onClick={() => setModalIsVisible(true)}>
+            Fazer login
+          </button>
+        </section>
 
-      <div onClick={() => setModalIsVisible(false)} aria-modal={modalIsVisible} className={styles.overlay}>
-        <div className={styles.modal}>
-          <p>Insira seu nome e uma foto para deixar seu perfil com a sua cara!</p>
-          <div className={styles.profileImage}>
-            <div>
-                <Icon icon="fluent:camera-edit-20-regular" width="40" />
-                <p>Clique aqui para inserir uma nova foto de perfil</p>
+        <div 
+        id="overlay" 
+        onClick={event => (event.target as HTMLDivElement).id == "overlay" ? setModalIsVisible(false) : null} 
+        aria-modal={modalIsVisible} 
+        className={styles.overlay}>
+          <div className={styles.modal}>
+            <p>Insira seu nome e uma foto para deixar seu perfil com a sua cara!</p>
+            <div className={styles.profileImage}>
+              <label htmlFor="chooseImage">
+                <div>
+                  <input accept="image/*" type="file" id="chooseImage" hidden onChange={event => setProfileImage(event.target.files[0])}/>
+                  <Icon icon="fluent:camera-edit-20-regular" width="40" />
+                  <p>Clique aqui para inserir uma nova foto de perfil</p>
+                </div>
+              </label>
+              <img src={profileImage ? URL.createObjectURL(profileImage) : "Profile.svg"} alt="Avatar-User" />
             </div>
-            <img src="Profile.svg" alt="Avatar-User" />
+            <input value={name} onChange={e => setName(e.target.value)} type="text" placeholder='Insira seu nome' />
+            <button onClick={() => saveUser()}>Logar</button>
           </div>
-          <input type="text" placeholder='Insira seu nome' />
-          <button>Logar</button>
         </div>
       </div>
-    </div>
+    </UserProvider>
   );
+}
+
+export const getServerSideProps: GetServerSideProps = async (ctx) => { 
+  const { userName, profileImage } = ctx.req.cookies;
+  
+  return {
+    props: {
+      userName: String(userName),
+      profileImage: profileImage ?? null
+    }
+  }
 }

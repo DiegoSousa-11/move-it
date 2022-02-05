@@ -13,50 +13,57 @@ import { ChallengesProvider } from "../../contexts/ChallengesContext";
 import { Menu } from "../../components/Common/Menu";
 import { useContext } from "react";
 import { ThemeContext } from "../../contexts/ThemeContext";
+import { UserProvider } from "../../contexts/UserContext";
 
 export default function Home(props) {
   const { theme } = useContext(ThemeContext);
 
   return (
-    <ChallengesProvider 
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}>
-      <div 
-      style={theme && {backgroundColor: theme.primaryColor}} 
-      className={styles.container}>
-        <Menu currentScreen="HOME"/>
-        <div className={styles.dashboard}>
-          <Head>
-            <title>Início | move.it</title>
-          </Head>
-          <ExperienceBar />
-          <CountdownProvider> {/*Foi colocado aqui, pois não vai ser usado em todo o app somente em algumas partes em específico */}
-            <section>
-              <div>
-                <Profile />
-                <CompletedChallenges />
-                <Countdown />
-              </div>
-              <div>
-                <ChallengeBox />
-              </div>
-            </section>
-          </CountdownProvider>
+    <UserProvider
+    name={props.name}
+    userImage={props.profileImage}>
+      <ChallengesProvider 
+        level={props.level}
+        currentExperience={props.currentExperience}
+        challengesCompleted={props.challengesCompleted}>
+        <div 
+        style={theme && {backgroundColor: theme.primaryColor}} 
+        className={styles.container}>
+          <Menu currentScreen="HOME"/>
+          <div className={styles.dashboard}>
+            <Head>
+              <title>Início | move.it</title>
+            </Head>
+            <ExperienceBar />
+            <CountdownProvider> {/*Foi colocado aqui, pois não vai ser usado em todo o app somente em algumas partes em específico */}
+              <section>
+                <div>
+                  <Profile />
+                  <CompletedChallenges />
+                  <Countdown />
+                </div>
+                <div>
+                  <ChallengeBox />
+                </div>
+              </section>
+            </CountdownProvider>
+          </div>
         </div>
-      </div>
-    </ChallengesProvider>
+      </ChallengesProvider>
+    </UserProvider>
   );
 }
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => { 
-  const { level, currentExperience, challengesCompleted } = ctx.req.cookies;
+  const { level, currentExperience, challengesCompleted, userName, profileImage } = ctx.req.cookies;
   
   return {
     props: {
       level: Number(level),
       currentExperience: Number(currentExperience),
-      challengesCompleted: Number(challengesCompleted)
+      challengesCompleted: Number(challengesCompleted),
+      userName: String(userName),
+      profileImage: profileImage ?? null
     }
   }
 }
