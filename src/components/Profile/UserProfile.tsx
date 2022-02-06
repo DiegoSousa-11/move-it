@@ -3,9 +3,12 @@ import styles from '../../styles/components/Profile/UserProfile.module.css';
 import { Icon } from '@iconify/react';
 import { ThemeContext } from '../../contexts/ThemeContext';
 import { useContext, useEffect, useState } from 'react';
+import { UserContext } from '../../contexts/UserContext';
 
 export function UserProfile() {
     const { theme } = useContext(ThemeContext);
+    const { name, profileImage } = useContext(UserContext);
+
     const [isEditingName, setIsEditingName] = useState(false);
 
     useEffect(() => {
@@ -28,7 +31,7 @@ export function UserProfile() {
                     <Icon icon="fluent:camera-edit-20-regular" width="60" />
                     <p>Clique aqui para inserir uma nova foto de perfil</p>
                 </div>
-                <img src="https://github.com/DiegoSousa-11.png" alt="Avatar-User" />
+                <img src={profileImage} alt="Avatar-User" />
             </div>
             <div style={theme && {color: theme.text}}>
                 <strong 
@@ -36,7 +39,7 @@ export function UserProfile() {
                 contentEditable={isEditingName}
                 suppressContentEditableWarning={true} 
                 onBlur={() => isEditingName && setIsEditingName(false)}
-                >Diego de Sousa
+                >{name}
                 </strong>
 
                 <Icon onClick={() => setIsEditingName(true)} icon="fluent:edit-24-filled" />

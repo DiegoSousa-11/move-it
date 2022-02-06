@@ -4,6 +4,7 @@ import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import { useState } from 'react';
 import { UserProvider } from '../contexts/UserContext';
+import { useRouter } from 'next/router';
 import styles from '../styles/pages/InitialScreen.module.css';
 
 export default function InitialScreen(props) {
@@ -11,15 +12,25 @@ export default function InitialScreen(props) {
   const [name, setName] = useState("");
   const [profileImage, setProfileImage] = useState(null) as any;
 
+  const routes = useRouter();
+
   function saveUser() {
     Cookies.set('userName', name);
-    Cookies.set('profileImage', profileImage);
+    
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+      localStorage.setItem("profileImage", (reader.result).toString());
+    })
+
+    reader.readAsDataURL(profileImage);
+
+    routes.replace("./Home");
   }
 
   return (
     <UserProvider 
-    name={props.userName}
-    userImage={props.profileImage}>
+    name={props.userName}>
       <div className={styles.container}>
         <Head>
           <title>Move.it</title>
@@ -50,7 +61,7 @@ export default function InitialScreen(props) {
             <div className={styles.profileImage}>
               <label htmlFor="chooseImage">
                 <div>
-                  <input accept="image/*" type="file" id="chooseImage" hidden onChange={event => setProfileImage(event.target.files[0])}/>
+                  <input accept="image/*" type="file" id="chooseImage" hidden onChange={event => setProfileImage((event.target.files[0]))}/>
                   <Icon icon="fluent:camera-edit-20-regular" width="40" />
                   <p>Clique aqui para inserir uma nova foto de perfil</p>
                 </div>

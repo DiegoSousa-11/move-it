@@ -1,7 +1,11 @@
 import { Icon } from '@iconify/react';
+import { useContext } from 'react';
+import { ChallengesContext } from '../../contexts/ChallengesContext';
 import styles from '../../styles/components/Profile/UserStatistics.module.css';
 
 export function UserStatistics() {
+    const { level, challengesCompleted, experienceToNextLevel, currentExperience } = useContext(ChallengesContext);
+
     return (
         <div className={styles.container}>
             <section>
@@ -11,7 +15,7 @@ export function UserStatistics() {
                         Level<br/> atual
                     </p>
                 </div>
-                <h1>1</h1>
+                <h1>{level}</h1>
             </section>
 
             <section>
@@ -21,7 +25,7 @@ export function UserStatistics() {
                         Desafios<br/> completos
                     </p>
                 </div>
-                <h1>1</h1>
+                <h1>{challengesCompleted}</h1>
             </section>
 
             <section>
@@ -31,7 +35,7 @@ export function UserStatistics() {
                         Xp para o próximo level
                     </p>
                 </div>
-                <h1>200</h1>
+                <h1>{experienceToNextLevel - currentExperience}xp</h1>
             </section>
         </div>
     )

@@ -3,35 +3,34 @@ import { useRouter } from 'next/router';
 
 interface UserContextData {
     name: string;
-    profileImage: File;
+    profileImage: string;
 }
 
 interface UserContextProvider {
     children: ReactNode;
     name: string;
-    userImage: File;
 }
 
 export const UserContext = createContext({} as UserContextData);
 
 export function UserProvider({ children, ...rest } : UserContextProvider) {
-    const [name, setName] = useState(rest.name);
-    const [profileImage, setProfileImage] = useState(rest.userImage ?? null);
+    const [name, setName] = useState(rest.name ?? null);
+    const [profileImage, setProfileImage] = useState("Profile.svg");
 
     const routes = useRouter();
 
     useEffect(() => {
-        console.log(name, routes.pathname)
-        if(name !== undefined)
-        {
-            if(name && routes.pathname === "/")
+        setProfileImage(localStorage.getItem("profileImage"));
+        if(name && name !== "undefined") {
+            console.log(name, routes.pathname)
+            if(routes.pathname === "/")
                 routes.replace("./Home");
-            else
-                if(routes.pathname !== "/")
-                    routes.replace("./")
         }
-        
-    }, [name])
+        else {
+            if(routes.pathname !== "/")
+                routes.replace("./");
+        }
+    }, [])
 
     return (
         <UserContext.Provider value={{

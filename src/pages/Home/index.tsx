@@ -20,8 +20,7 @@ export default function Home(props) {
 
   return (
     <UserProvider
-    name={props.name}
-    userImage={props.profileImage}>
+    name={props.userName}>
       <ChallengesProvider 
         level={props.level}
         currentExperience={props.currentExperience}
