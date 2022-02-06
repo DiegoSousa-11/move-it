@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 interface UserContextData {
     name: string;
     profileImage: string;
+    setProfileImage: (any) => void;
 }
 
 interface UserContextProvider {
@@ -35,7 +36,8 @@ export function UserProvider({ children, ...rest } : UserContextProvider) {
     return (
         <UserContext.Provider value={{
             name,
-            profileImage
+            profileImage,
+            setProfileImage
         }}>
             {children}
         </UserContext.Provider>
