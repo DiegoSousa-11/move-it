@@ -26,7 +26,7 @@ O move.it é um projeto desenvolvido com React Js e Next Js, durante a Next Leve
 </p>
 
 ## :link: **Pré-Requisitos**
-Antes de começar, é necessário ter o <a href="https://nodejs.org/pt-br">Node Js instalado em sua máquina</a>, além disso, é interessante ter um bom editor de código para trabalhar, como o <a href="https://code.visualstudio.com/Download">VSCODE</a>.
+Antes de começar, é necessário ter o <a href="https://nodejs.org/pt-br">Node Js</a> instalado em sua máquina, além disso, é interessante ter um bom editor de código para trabalhar, como o <a href="https://code.visualstudio.com/Download">VSCODE</a>.
 
 ## :technologist: **Instalação**
 1. Clonar repositório
@@ -34,9 +34,11 @@ Antes de começar, é necessário ter o <a href="https://nodejs.org/pt-br">Node 
 3. Abrir o terminal do VSCODE ou abrir o cmd dentro do repositório
 4. Execute os comandos abaixo
 ```sh
-yarn
+# Instalar todas as dependências do projeto
+yarn install
 ```
 ```sh
+# Executar a aplicação em modo de desenvolvimento
 yarn dev
 ```
 5. Abra o servidor local(localhost) exibido no terminal
