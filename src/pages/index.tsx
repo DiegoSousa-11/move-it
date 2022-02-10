@@ -2,7 +2,7 @@ import { Icon } from '@iconify/react';
 import Cookies from 'js-cookie';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { UserProvider } from '../contexts/UserContext';
 import { useRouter } from 'next/router';
 import styles from '../styles/pages/InitialScreen.module.css';
@@ -28,10 +28,25 @@ export default function InitialScreen(props) {
     routes.replace("./Home");
   }
 
+  useEffect(() => {
+    window.addEventListener("orientationchange", () => {
+      if(routes.pathname == "/")
+      {
+        setModalIsVisible(false);
+        document.getElementById("overlay").style.height = "100%";
+      }
+    })
+  }, [])
+
+  function openModal() {
+    document.getElementById("overlay").style.height = document.body.clientHeight.toString() + "px";
+    setModalIsVisible(true);
+  }
+
   return (
     <UserProvider 
     name={props.userName}>
-      <div className={styles.container}>
+      <div id="container" className={styles.container}>
         <Head>
           <title>Move.it</title>
         </Head>
@@ -46,7 +61,7 @@ export default function InitialScreen(props) {
           <img src="logo_full.svg" alt="logo_full" />
           <h1>Bem vindo!</h1>
           <h2>Faça login para começar!</h2>
-          <button onClick={() => setModalIsVisible(true)}>
+          <button onClick={() => openModal()}>
             Fazer login
           </button>
         </section>

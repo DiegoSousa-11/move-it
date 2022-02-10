@@ -21,7 +21,17 @@
     align-content: center;
 }
 
+@media(max-width: 823px) and (orientation: landscape) {
+    .dashboard {
+        overflow-y: scroll;
+    }
+}
+
 @media(max-width: 750px) {
+    .dashboard {
+        overflow-y: scroll;
+    }
+
     .dashboard section {
         display: block;
         width: 70%;
@@ -30,11 +40,6 @@
 
     .dashboard section > div {
         margin: 50px 0;
-    }
-
-    .dashboard section div:last-child  > div:last-child {
-        height: 500px;
-        justify-content: center
     }
 }
 
@@ -47,5 +52,11 @@
 @media(max-width: 420px) {
     .dashboard section {
         width: 95%;
+    }
+}
+
+@media(max-width: 320px) and (orientation: portrait) {
+    .dashboard{
+        padding: 2.5rem 1rem;
     }
 }

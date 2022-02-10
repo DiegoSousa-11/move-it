@@ -21,7 +21,7 @@ let countdownTimeout: NodeJS.Timeout;
 export function CountdownProvider({children} : CountdownProviderProps) {
     const { startNewChallenge } = useContext(ChallengesContext);
 
-    const timeInMinutes = .1;
+    const timeInMinutes = 25;
 
     const [time, setTime] = useState(timeInMinutes * 60); // 25 minutos em segundos
     const [isActive, setIsActive] = useState(false); //Mostra se o countdown está rodando(true) ou pausado(false)
@@ -47,7 +47,6 @@ export function CountdownProvider({children} : CountdownProviderProps) {
         if(isActive && time > 0) {
             countdownTimeout = setTimeout(() => {
                 setTime(time - 1); //Diminui 1s
-                console.log(percentTime);
             }, 1000) //Executar função depois de 1s
         } else if(isActive && time == 0) {
             setHasFinished(true);

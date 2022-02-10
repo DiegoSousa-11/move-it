@@ -23,7 +23,6 @@ export function UserProvider({ children, ...rest } : UserContextProvider) {
     useEffect(() => {
         setProfileImage(localStorage.getItem("profileImage"));
         if(name && name !== "undefined") {
-            console.log(name, routes.pathname)
             if(routes.pathname === "/")
                 routes.replace("./Home");
         }

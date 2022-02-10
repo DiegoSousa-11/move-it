@@ -10,7 +10,7 @@ export function UserStatistics() {
         <div className={styles.container}>
             <section>
                 <div>
-                    <Icon icon="fluent:arrow-trending-lines-24-filled" height="40" />
+                    <Icon icon="fluent:arrow-trending-lines-24-filled" height="50" />
                     <p>
                         Level<br/> atual
                     </p>
@@ -32,7 +32,7 @@ export function UserStatistics() {
                 <div>
                     <Icon icon="fluent:arrow-trending-16-filled" height="50" />
                     <p>
-                        Xp para o próximo level
+                        Xp para próximo level
                     </p>
                 </div>
                 <h1>{experienceToNextLevel - currentExperience}xp</h1>

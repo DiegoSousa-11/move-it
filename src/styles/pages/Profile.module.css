@@ -12,3 +12,21 @@
     justify-content: center;
     flex-direction: column;
 }
+
+@media(max-width: 823px) and (orientation: landscape) {
+    .dashboard {
+        overflow-y: scroll;
+    }
+}
+
+@media(max-width: 750px) { 
+    .dashboard {
+        overflow-y: scroll;
+    }
+}
+
+@media(max-width: 500px) { 
+    .dashboard {
+        padding: 2.5rem 1rem;
+    }
+}

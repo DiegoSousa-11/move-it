@@ -4,7 +4,7 @@
     align-items: center;
 
     background-color: var(--blue);
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .container section {
@@ -80,7 +80,7 @@
 
     background-color: rgba(0, 0, 0, 0.6);
 
-    transition: 1s;
+    transition: opacity 1s;
 }
 
 .overlay[aria-modal = true] {
@@ -100,10 +100,11 @@
     align-items: center;
     text-align: center;
 
-    max-width: 450px;
+    max-width: 80vw;
     padding: 2rem;
 
     background-color: white;
+    transition: all .5s;
 }
 
 .modal > p {
@@ -187,7 +188,7 @@
     font-weight: 500;
     font-size: 1.2rem;
 
-    transition: .5s;
+    transition: background-color .5s;
 }
 
 .modal button:hover {
@@ -205,5 +206,70 @@
 
     100% {
         transform: translate3d(0px, 0px, 0px);
+    }
+}
+
+@media(max-width: 1024px) {
+    .logo {
+        width: 40vw !important;
+        margin-left: 5rem;
+    }
+}
+
+@media(max-width: 863px) and (orientation: landscape) {
+    .logo {
+        margin-bottom: 2rem;
+    }
+}
+
+@media(max-width: 863px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .container section {
+        margin-inline: auto;
+    }
+
+    .logo {
+        height: 30vh !important;
+        margin-top: 2rem;
+    }
+    
+    .logo img {
+        width: 12vh;
+    }
+    
+    .main {
+        width: 80vw !important;
+    }
+
+    .main img {
+        margin: 1rem auto;
+    }
+
+    .main button {
+        width: 80%;
+    }
+}
+
+@media(max-height: 500px) and (orientation: landscape) {
+    .profileImage img, .profileImage div {
+        width: 8rem;
+        height: 8rem;
+    }
+
+    .modal {
+        width: 70vw;
+        padding: 1.5rem;
+    }
+
+    .modal input {
+        margin-top: 1rem;
+        height: 3rem;
+    }
+
+    .modal button {
+        height: 3rem;
     }
 }

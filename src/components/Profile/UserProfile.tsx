@@ -45,8 +45,7 @@ export function UserProfile() {
 
         Cookies.set("userName", newName);
 
-        setIsEditingName(false)
-        console.log(newName)
+        setIsEditingName(false);
     }
 
     return (

@@ -38,13 +38,39 @@
 }
 
 .container div[aria-checked = true] {
-    left: 59px;
+    left: 3.7rem;
 }
 
 .container div[aria-checked = false] {
-    left: 27px;
+    left: 1.7rem;
 }
 
 .container:hover div {
     box-shadow: 0 0 4px 0px rgba(110, 64, 201, 0.6) inset, 0 0 5px 3px rgba(110, 64, 201, 0.6);
+}
+
+@media(max-width: 768px) {
+    .container div[aria-checked = true] {
+        left: 3.8rem;
+    }
+    
+    .container div[aria-checked = false] {
+        left: 1.9rem;
+    }
+}
+
+@media(max-width: 320px) and (orientation: portrait) {
+    .container {
+        width: 85%;
+
+        font-size: .9rem;
+    }
+
+    .container div[aria-checked = true] {
+        left: 2.3rem;
+    }
+    
+    .container div[aria-checked = false] {
+        left: 0.5rem;
+    }
 }

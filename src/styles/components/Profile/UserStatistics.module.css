@@ -36,3 +36,14 @@
 .container section div svg {
     color: var(--green);
 }
+
+@media(max-width: 568px) { 
+    .container {
+        display: block;
+        margin-top: 1.5rem;
+    }
+
+    .container section {
+        margin: 1.4rem auto;
+    }
+}
