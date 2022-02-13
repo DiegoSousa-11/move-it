@@ -3,8 +3,8 @@ import { ThemeContext } from '../../contexts/ThemeContext';
 import styles from '../../styles/components/Home/Switch.module.css';
 
 export function Switch() {
-    const [isDarkTheme, setIsDarkTheme] = useState(false);
     const { switchTheme, theme } = useContext(ThemeContext);
+    const [isDarkTheme, setIsDarkTheme] = useState(theme ? true : false);
 
     function changeTheme() {
         switchTheme();

@@ -1,24 +1,12 @@
-import { createContext, ReactNode, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
+import { IProvider } from "../models/ICommon";
+import { ICountdown } from "../models/ICountdown";
 import { ChallengesContext } from "./ChallengesContext";
 
-interface CountdownContextData {
-    minutes: number;
-    seconds: number;
-    hasFinished: boolean;
-    isActive: boolean;
-    percentTime: number;
-    startCountdown: () => void;
-    resetCountdown: () => void;
-}
-
-interface CountdownProviderProps {
-    children: ReactNode;
-}
-
-export const CountdownContext = createContext({} as CountdownContextData);
+export const CountdownContext = createContext({} as ICountdown);
 let countdownTimeout: NodeJS.Timeout;
 
-export function CountdownProvider({children} : CountdownProviderProps) {
+export function CountdownProvider({children} : IProvider) {
     const { startNewChallenge } = useContext(ChallengesContext);
 
     const timeInMinutes = 25;

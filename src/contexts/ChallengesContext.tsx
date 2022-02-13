@@ -1,37 +1,12 @@
-import { createContext, useState, ReactNode, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import challenges from '../../challenges.json';
 import { LevelUpModal } from '../components/Home/LevelUpModal';
+import { IChallengesData, IChallengesProvider } from '../models/IChallenges';
 
-interface Challenge {
-    type: 'body' | 'eye';
-    description: string;
-    amount: number;
-}
+export const ChallengesContext = createContext({} as IChallengesData); //"as" diz que segue o formato de "ChallengesContextData"
 
-interface ChallengesContextData {
-    level: number;
-    currentExperience: number;
-    experienceToNextLevel: number;
-    challengesCompleted: number;
-    activeChallenge: Challenge;
-    levelUp: () => void;
-    startNewChallenge: () => void;
-    resetChallenge: () => void;
-    completeChallenge: () => void; 
-    closeLevelUpModal: () => void;
-}
-
-interface ChallengesProviderProps { //Tipagem pelo type Script
-    children: ReactNode //ReactNode é para todos componentes react
-    level: number;
-    currentExperience: number;
-    challengesCompleted: number;
-}
-
-export const ChallengesContext = createContext({} as ChallengesContextData); //"as" diz que segue o formato de "ChallengesContextData"
-
-export function ChallengesProvider({ children, ...rest } : ChallengesProviderProps) {
+export function ChallengesProvider({ children, ...rest } : IChallengesProvider) {
     const [level, setLevel] = useState(rest.level ?? 1); //?? (Se rest.level não existir, usar um)
     const [currentExperience, setCurrentExperience] = useState(rest.currentExperience ?? 0);
     const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted ?? 0);

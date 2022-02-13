@@ -1,4 +1,5 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { IProvider } from "../models/ICommon";
 
 interface ThemeContextProps {
     theme: any;
@@ -16,7 +17,7 @@ const styleTheme = {
 
 export const ThemeContext = createContext({} as ThemeContextProps);
 
-export function ThemeProvider({children} : {children: ReactNode}) {
+export function ThemeProvider({children} : IProvider) {
     const [isDark, setIsDark] = useState(false);
     const [theme, setTheme] = useState(isDark ? styleTheme.dark : null);
 

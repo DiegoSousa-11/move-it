@@ -1,20 +1,10 @@
-import { ReactNode, useEffect, useState, createContext } from "react";
+import { useEffect, useState, createContext } from "react";
 import { useRouter } from 'next/router';
+import { IUser, IUserProvider } from "../models/IUser";
 
-interface UserContextData {
-    name: string;
-    profileImage: string;
-    setProfileImage: (any) => void;
-}
+export const UserContext = createContext({} as IUser);
 
-interface UserContextProvider {
-    children: ReactNode;
-    name: string;
-}
-
-export const UserContext = createContext({} as UserContextData);
-
-export function UserProvider({ children, ...rest } : UserContextProvider) {
+export function UserProvider({ children, ...rest } : IUserProvider) {
     const [name, setName] = useState(rest.name ?? null);
     const [profileImage, setProfileImage] = useState("Profile.svg");
 
