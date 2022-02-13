@@ -1,13 +1,15 @@
 import { useContext } from 'react';
 import { ChallengesContext } from '../../contexts/ChallengesContext';
+import { ThemeContext } from '../../contexts/ThemeContext';
 import styles from '../../styles/components/Home/LevelUpModal.module.css';
 
 export function LevelUpModal() {
+    const { theme } = useContext(ThemeContext);
     const { level, closeLevelUpModal } = useContext(ChallengesContext)
 
     return(
         <div className={styles.overlay}>
-            <div className={styles.container}>
+            <div style={ theme && {backgroundColor: theme.secondaryColor}} className={styles.container}>
                 <header>{ level }</header>
 
                 <strong>Parabéns</strong>

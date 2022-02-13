@@ -28,3 +28,8 @@
 .profileContainer div p img {
     margin-right: 0.5rem;
 }
+
+.profileContainer svg {
+    margin-left: auto;
+    cursor: pointer;
+}
